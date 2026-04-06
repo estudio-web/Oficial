@@ -70,39 +70,6 @@ body {
   );
 }
 
-.buy-btn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(135deg, #FF6B00, #FF8C00);
-  color: white;
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.5px;
-
-  cursor: pointer;
-
-  box-shadow: 0 4px 15px rgba(255,107,0,0.4);
-  transition: all 0.25s ease;
-}
-
-.buy-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(255,107,0,0.7);
-}
-
-.buy-btn:active {
-  transform: scale(0.97);
-}
-
-.buy-btn::after {
-  content: "🔥";
-  margin-left: 5px;
-}
-
 /* HEADER */
 .header {
   position: sticky;
@@ -560,9 +527,9 @@ body {
 }
 
 .card:hover {
-  border-color: var(--border-bright);
+  border-color: white;
   transform: translateY(-4px);
-  box-shadow: var(--shadow-glow), var(--shadow-card);
+  box-shadow: 0 1px 13px rgb(255, 255, 255);
 }
 
 .card-badge {
@@ -621,7 +588,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 36px;
-  text-shadow: 0 0 20px rgba(100,200,255,0.8);
+  text-shadow: 0 0 20px rgb(100, 201, 255);
   animation: diamond-glow 2s ease-in-out infinite;
 }
 
@@ -632,27 +599,32 @@ body {
 
 .card-body {
   padding: 12px;
+  display: grid;
+
 }
 
-.card-diamonds {
+
+
+.cantidad {
   font-family: var(--font-head);
-  font-size: 18px;
+  font-size: 28px;
   font-weight: 900;
-  color: #fff;
-  display: flex;
+  color: #ffffff;
   align-items: center;
   gap: 4px;
-  margin-bottom: 2px;
+  padding: 10px;
+  margin: auto;
 }
 
 .card-diamonds span { color: var(--cyan); font-size: 14px; }
 
-.card-price {
+.precio {
   font-family: var(--font-head);
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--orange);
-  margin-bottom: 4px;
+  margin: auto;
+  align-items: center;
 }
 
 .card-per {
@@ -676,6 +648,25 @@ body {
   height: 100%;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--orange), var(--gold));
+}
+
+.btn{
+    align-items: center;
+    background: rgba(0, 0, 0, 0.527);
+    border: 2px solid var(--orange);
+    border-radius: 30px;
+    padding: 16px 14px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--orange);
+    margin: 10px;
+}
+
+.btn:hover{
+  border:3px solid #ffffff;
+  background-color: var(--orange);
+  color: #000000;
 }
 
 .btn-add {
@@ -974,6 +965,7 @@ body {
   font-weight: 600;
 }
 
+
 .cart-item-remove {
   background: none;
   border: none;
@@ -1014,7 +1006,7 @@ body {
 .form-group label {
   font-size: 12px;
   font-weight: 700;
-  color: var(--text-dim);
+  color: var(--orange);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
