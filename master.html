@@ -11,40 +11,92 @@
 <style>
 .hidden { display: none !important; }
 
-.nav-item.active {
-  background: var(--orange, #FF6B00);
-  color:#000;
-}
-
-.section { margin-top: 20px; }
-
-.filters {
+body {
+  margin:0;
   display:flex;
-  gap:10px;
-  margin:10px 0;
-  flex-wrap:wrap;
 }
 
-.filters input,
-.filters select {
-  padding:8px;
-  border-radius:6px;
-  border:none;
+/* SIDEBAR */
+.sidebar {
+  width:260px;
+  background:#111;
+  color:white;
+  height:100vh;
+  position:fixed;
+  left:0;
+  top:0;
+  transition: transform 0.3s ease;
+  z-index:1000;
 }
 
-.order-row {
-  border-bottom:1px solid #333;
-  padding:10px;
+.sidebar.closed {
+  transform: translateX(-100%);
 }
 
-.stat-card div:last-child {
+/* MAIN */
+.main-content {
+  margin-left:260px;
+  width:100%;
+  transition: margin 0.3s ease;
+}
+
+.main-content.full {
+  margin-left:0;
+}
+
+/* HEADER */
+.admin-header {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  background:#000;
+  color:white;
+}
+
+/* OVERLAY */
+.overlay {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:999;
+  display:none;
+}
+
+.overlay.active {
+  display:block;
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left:0;
+  }
+}
+
+/* BOTÓN */
+#toggleSidebar {
   font-size:22px;
-  font-weight:bold;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay"></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -65,157 +117,74 @@
 </aside>
 
 <!-- MAIN -->
-<main class="main-content">
+<main class="main-content" id="mainContent">
 
-  <!-- HEADER -->
-  <header class="admin-header">
-    <h1 id="pageTitle">Dashboard Global</h1>
-    <div class="header-right">
-      <span id="userName">Admin</span>
-      <button id="toggleSidebar">☰</button>
+<header class="admin-header">
+  <h1 id="pageTitle">Dashboard Global</h1>
+
+  <div>
+    <span id="userName">Admin</span>
+    <button id="toggleSidebar">☰</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- DASHBOARD -->
+  <div class="tab-content" id="dashboard-tab">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div>👥</div>
+        <div>Vendedores</div>
+        <div id="totalVendedores">0</div>
+      </div>
     </div>
-    
-  </header>
-
-  <!-- CONTENIDO -->
-  <div class="container">
-
-    <!-- DASHBOARD -->
-    <div class="tab-content" id="dashboard-tab">
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div>👥</div>
-          <div>Vendedores</div>
-          <div id="totalVendedores">0</div>
-        </div>
-
-        <div class="stat-card">
-          <div>💰</div>
-          <div>Ingresos</div>
-          <div id="totalIngresosGlobal">$0</div>
-        </div>
-
-        <div class="stat-card">
-          <div>📊</div>
-          <div>Ventas</div>
-          <div id="totalVentasGlobal">0</div>
-        </div>
-
-        <div class="stat-card">
-          <div>💎</div>
-          <div>Diamantes</div>
-          <div id="totalDiamantes">0</div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>🏆 Top Vendedores</h2>
-        <div id="topVendedoresList"></div>
-      </div>
-
-    </div>
-
-    <!-- USUARIOS -->
-    <div class="tab-content hidden" id="usuarios-tab">
-
-      <h2>👥 Gestión de Usuarios</h2>
-
-      <div class="filters">
-        <select id="filterUserStatus">
-          <option value="">Todos</option>
-          <option value="activo">Activos</option>
-          <option value="suspendido">Suspendidos</option>
-        </select>
-      </div>
-
-      <div id="usuariosList"></div>
-
-    </div>
-
-    <!-- PEDIDOS -->
-    <div class="tab-content hidden" id="pedidos-global-tab">
-
-      <h2>📋 Pedidos Globales</h2>
-
-      <div class="filters">
-        <select id="filterOrderStatus">
-          <option value="">Todos</option>
-          <option value="pendiente">Pendiente</option>
-          <option value="pagado">Pagado</option>
-          <option value="entregado">Entregado</option>
-          <option value="cancelado">Cancelado</option>
-        </select>
-
-        <select id="filterUserOrders">
-          <option value="">Todos los vendedores</option>
-        </select>
-      </div>
-
-      <div id="pedidosGlobalList"></div>
-
-    </div>
-
-    <!-- CONFIG -->
-    <div class="tab-content hidden" id="configuracion-tab">
-
-      <h2>⚙️ Configuración Global</h2>
-
-      <div class="filters">
-        <input type="number" id="comisionGlobal" placeholder="Comisión %">
-        <input type="number" id="limiteFree" placeholder="Límite free">
-      </div>
-
-      <textarea id="maintenanceMsg" placeholder="Mensaje global"></textarea>
-
-      <br><br>
-      <button id="saveGlobalConfig">Guardar Configuración</button>
-
-      <hr>
-
-      <!-- 🔥 NUEVO SISTEMA UID -->
-      <h2>🔗 Vincular Usuario (Auth → Firestore)</h2>
-
-      <div class="filters">
-        <input id="newUserUID" placeholder="UID (Firebase Auth)">
-        <input id="newAdminEmail" placeholder="Email">
-        <input id="newAdminTienda" placeholder="Nombre tienda">
-        <input id="newTelefono" placeholder="WhatsApp">
-      </div>
-
-      <div class="filters">
-        <input type="color" id="newColor" value="#FF6B00">
-
-        <select id="newPlan">
-          <option value="free">Free</option>
-          <option value="pro">Pro</option>
-          <option value="master">Master</option>
-        </select>
-
-        <input type="number" id="newDuracion" placeholder="Duración días (30)">
-      </div>
-
-      <button id="createUserFirestore">Crear / Vincular Usuario</button>
-
-      <h2>📣 Enviar Notificación Global</h2>
-
-<input id="pushTitle" placeholder="Título">
-<input id="pushBody" placeholder="Mensaje">
-
-<button id="sendPush">Enviar Push</button>
-    </div>
-    
   </div>
 
-  
+  <!-- USUARIOS -->
+  <div class="tab-content hidden" id="usuarios-tab">
+    <h2>Usuarios</h2>
+    <div id="usuariosList"></div>
+  </div>
 
+  <!-- PEDIDOS -->
+  <div class="tab-content hidden" id="pedidos-global-tab">
+    <h2>Pedidos</h2>
+    <div id="pedidosGlobalList"></div>
+  </div>
+
+  <!-- CONFIG -->
+  <div class="tab-content hidden" id="configuracion-tab">
+    <h2>Configuración</h2>
+
+    <input id="pushTitle" placeholder="Título">
+    <input id="pushBody" placeholder="Mensaje">
+
+    <button id="sendPush">Enviar</button>
+  </div>
+
+</div>
 </main>
 
-<!-- FIREBASE -->
 <script type="module" src="master-script.js"></script>
 
-<!-- TABS -->
+<!-- 🔥 SCRIPT UI -->
 <script>
+const sidebar = document.getElementById("sidebar");
+const toggleBtn = document.getElementById("toggleSidebar");
+const overlay = document.getElementById("overlay");
+
+toggleBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("active");
+});
+
+overlay.addEventListener("click", () => {
+  sidebar.classList.remove("open");
+  overlay.classList.remove("active");
+});
+
+// TABS
 document.querySelectorAll(".nav-item").forEach(btn => {
   btn.addEventListener("click", () => {
 
@@ -227,19 +196,12 @@ document.querySelectorAll(".nav-item").forEach(btn => {
     document.querySelectorAll(".tab-content").forEach(t => t.classList.add("hidden"));
     document.getElementById(tab + "-tab").classList.remove("hidden");
 
-    const titles = {
-      dashboard: "Dashboard Global",
-      usuarios: "Usuarios",
-      "pedidos-global": "Pedidos Globales",
-      configuracion: "Configuración"
-    };
+    // cerrar sidebar en mobile
+    sidebar.classList.remove("open");
+    overlay.classList.remove("active");
 
-    document.getElementById("pageTitle").textContent = titles[tab];
   });
 });
-
-
-
 </script>
 
 </body>
