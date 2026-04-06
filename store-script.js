@@ -12,13 +12,13 @@ function renderProductos() {
 
   contenedor.innerHTML = PRODUCTOS.map(p => `
     <div class="card">
-      <img class="product-img" src="${p.imagen || 'https://latingm.com/wp-content/uploads/2021/02/Diamantes-Free-Fire-Latinoamerica.jpg'}">
+     <img class="product-img" src="${p.imagen || 'https://latingm.com/wp-content/uploads/2021/02/Diamantes-Free-Fire-Latinoamerica.jpg'}">
       <div class="card-body">
-        <h2>${p.diamantes} 💎</h2>
-        <div class="precio">$${p.precioBase}</div>
-        <button class="buy-btn" onclick="addToCart('${p.id}')">
-  ⚡ Comprar ahora
-</button>
+        <div class="cantidad">💎 ${p.diamantes} 💎</div>
+        <div class="precio">$ ${p.precioBase}</div>
+        <button class="btn" onclick="addToCart('${p.id}')">
+          Comprar
+        </button>
       </div>
     </div>
   `).join("");
