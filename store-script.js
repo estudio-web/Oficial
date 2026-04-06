@@ -16,9 +16,9 @@ function renderProductos() {
       <div class="card-body">
         <h2>${p.diamantes} 💎</h2>
         <div class="precio">$${p.precioBase}</div>
-        <button class="btn" onclick="addToCart('${p.id}')">
-          Comprar
-        </button>
+        <button class="buy-btn" onclick="addToCart('${p.id}')">
+  ⚡ Comprar ahora
+</button>
       </div>
     </div>
   `).join("");
