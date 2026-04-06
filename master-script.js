@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     usuariosList.innerHTML = users.map(u => {
 
-      const link = `${window.location.origin}/index.html?user=${u.id}`;
+      const link = `${window.location.origin}/Oficial/?user=${u.id}`;
 
       return `
         <div class="order-row">
