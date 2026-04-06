@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenido 🚀</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0f0f0f;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.btn {
+  background: #FF6B00;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.link {
+  word-break: break-all;
+  font-size: 14px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🔥 Tu tienda está lista</h1>
+  <p id="nombreTienda">Cargando...</p>
+
+  <div class="card">
+
+    <h3>🔗 Tu link de ventas</h3>
+    <div class="link" id="linkTienda"></div>
+
+    <button class="btn" id="copyLink">Copiar link</button>
+    <button class="btn" id="goStore">Ir a tienda</button>
+
+  </div>
+
+  <div class="card">
+    <h3>🚀 Siguiente paso</h3>
+    <p>Compartí tu link y empezá a vender</p>
+  </div>
+
+</div>
+
+<script type="module" src="welcome.js"></script>
+
+</body>
+</html>

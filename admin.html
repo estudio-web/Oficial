@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Admin — ARG STORE</title>
+<link rel="stylesheet" href="admin-styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h2>🎮 PANEL ADMIN</h2>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" data-tab="dashboard">📊 Dashboard</button>
+    <button class="nav-item" data-tab="config">⚙️ Configuración</button>
+    <button class="nav-item" data-tab="productos">📦 Productos</button>
+    <button class="nav-item" data-tab="pedidos">📋 Pedidos</button>
+  </nav>
+  <div class="sidebar-footer">
+    <button id="logoutAdmin" class="btn-logout">🚪 Cerrar sesión</button>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+  <!-- HEADER -->
+  <header class="admin-header">
+    <h1 id="pageTitle">Dashboard</h1>
+    <div class="header-right">
+      <span id="userName" class="user-info">Usuario</span>
+      <button id="toggleSidebar" class="toggle-btn">☰</button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO DINÁMICO -->
+  <div class="container">
+
+    <!-- TAB: DASHBOARD -->
+    <div class="tab-content" id="dashboard-tab">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Ingresos</div>
+            <div class="stat-value" id="totalIngresos">$0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Ventas</div>
+            <div class="stat-value" id="totalVentas">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-info">
+            <div class="stat-label">Pendientes</div>
+            <div class="stat-value" id="totalPendientes">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-info">
+            <div class="stat-label">Entregados</div>
+            <div class="stat-value" id="totalEntregados">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Últimos Pedidos</h2>
+        <div id="recentOrdersList" class="orders-table">
+          <p style="text-align:center; padding:20px;">Cargando...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CONFIGURACIÓN -->
+    <div class="tab-content hidden" id="config-tab">
+      <div class="section">
+        <h2>⚙️ Configuración de Tienda</h2>
+        
+        <h3>🎨 Personalización</h3>
+
+<label>Logo</label>
+<input type="file" id="logoInput">
+
+<label>Texto Banner</label>
+<input type="text" id="bannerTexto" placeholder="Ej: 🔥 Oferta hoy">
+
+<label>Mensaje Promocional</label>
+<input type="text" id="mensajePromo" placeholder="Ej: 10% OFF">
+
+<button id="saveExtras">Guardar personalización</button>
+
+        <div class="form-group">
+          <label>Nombre de la Tienda</label>
+          <input type="text" id="nombreTienda" class="input-field" placeholder="Ej: Mi Tienda">
+        </div>
+
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea id="descripcion" class="input-field" placeholder="Describe tu tienda"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Teléfono WhatsApp</label>
+          <input type="tel" id="telefonoWA" class="input-field" placeholder="Ej: 5492646706973">
+        </div>
+
+        <div class="form-group">
+          <label>Color Principal</label>
+          <div class="color-picker-wrapper">
+            <input type="color" id="colorTema" value="#FF6B00" class="color-picker">
+            <span id="colorValue" class="color-value">#FF6B00</span>
+            
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="mostrarSorteos" checked>
+            Mostrar Sorteos
+          </label>
+          <label>
+            <input type="checkbox" id="mostrarPromociones">
+            Mostrar Promociones
+          </label>
+        </div>
+
+        <button id="saveConfig" class="btn-primary">💾 Guardar Configuración</button>
+      </div>
+    </div>
+
+    <!-- TAB: PRODUCTOS -->
+    <div class="section">
+  <h2>📦 Gestión de Productos</h2>
+
+  <!-- FORM CREAR PRODUCTO -->
+  <div class="form-group">
+    <input id="prodDiamantes" placeholder="Diamantes" class="input-field">
+    <input id="prodPrecio" placeholder="Precio" class="input-field">
+    <button id="addProducto" class="btn-primary">➕ Agregar Producto</button>
+  </div>
+
+  <div id="productosList" class="productos-grid"></div>
+</div>
+
+    <!-- TAB: PEDIDOS -->
+    <div class="tab-content hidden" id="pedidos-tab">
+      <div class="section">
+        <h2>📋 Todos los Pedidos</h2>
+        
+        <div class="filter-bar">
+          <select id="filterEstado" class="filter-select">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">⏳ Pendiente</option>
+            <option value="pagado">💳 Pagado</option>
+            <option value="entregado">✅ Entregado</option>
+            <option value="cancelado">❌ Cancelado</option>
+          </select>
+        </div>
+
+        <div id="pedidosList" class="orders-table">
+          <p style="text-align:center; padding:20px;">Cargando...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- MODAL DETALLE PEDIDO -->
+<div id="orderModal" class="modal hidden">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeOrderModal()">✕</button>
+    <div id="orderModalBody"></div>
+  </div>
+</div>
+
+<!-- FIREBASE SCRIPTS -->
+<script type="module" src="admin-script.js"></script>
+
+</body>
+</html>

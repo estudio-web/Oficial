@@ -1,0 +1,451 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                        📚 ÍNDICE COMPLETO DEL PROYECTO                        ║
+║                  Free Fire Store - Plataforma SaaS Multi-Tenant                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📖 DOCUMENTACIÓN (LEE PRIMERO)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🚀 INICIO_RAPIDO.txt
+   ├─ Para: Comenzar en 5 minutos
+   ├─ Contenido: Setup básico, Firebase, testing
+   ├─ Ideal para: Desarrollo local
+   └─ Leer primero si: Tienes prisa
+
+2. 📋 README_FIREBASE.txt
+   ├─ Para: Configuración profesional
+   ├─ Contenido: Paso a paso completo, BD, seguridad
+   ├─ Ideal para: Producción
+   └─ Leer si: Necesitas configuración detallada
+
+3. 📊 RESUMEN_PROYECTO.txt
+   ├─ Para: Entender qué se hizo
+   ├─ Contenido: Cambios, features, arquitectura
+   ├─ Ideal para: Overview general
+   └─ Leer si: Quieres ver big picture
+
+4. ✅ CAMBIOS_IMPLEMENTADOS.txt
+   ├─ Para: Detalle de mejoras
+   ├─ Contenido: Lista de cambios, flujos, datos
+   ├─ Ideal para: Desarrolladores
+   └─ Leer si: Necesitas entender cada cambio
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 PÁGINAS (ABRIR EN NAVEGADOR)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🛍️ index.html
+   ├─ Descripción: Tienda de diamantes Free Fire
+   ├─ Usuario: Cualquiera (anónimo o registrado)
+   ├─ Funciones:
+   │  ├─ Ver productos
+   │  ├─ Agregar al carrito
+   │  ├─ Completar formulario
+   │  ├─ Enviar a WhatsApp
+   │  └─ Si login: guardar en Firestore
+   ├─ Diseño: Gaming moderno (naranja + negro)
+   ├─ Responsive: Sí (mobile, tablet, desktop)
+   ├─ PWA: Sí (instalable)
+   └─ Requisitos: Navegador moderno
+
+2. 🔐 login.html
+   ├─ Descripción: Autenticación y registro
+   ├─ Usuario: Nuevo o existente
+   ├─ Funciones:
+   │  ├─ Login con email/contraseña
+   │  ├─ Registro de nueva cuenta
+   │  ├─ Validaciones
+   │  └─ Crear perfil automático
+   ├─ Requisitos: Firebase configurado
+   └─ Redirige a: admin.html (si login exitoso)
+
+3. 👤 admin.html
+   ├─ Descripción: Panel del revendedor
+   ├─ Usuario: Revendedor autenticado
+   ├─ Requisitos: Email/contraseña válido
+   ├─ Funciones:
+   │  ├─ Dashboard (estadísticas)
+   │  ├─ Configuración (nombre, color, teléfono)
+   │  ├─ Productos (editar precios)
+   │  ├─ Pedidos (ver, filtrar, cambiar estado)
+   │  └─ Logout
+   ├─ Responsive: Sí (con sidebar colapsible)
+   └─ Estilo: Dark mode gaming
+
+4. 👑 master.html
+   ├─ Descripción: Panel del super admin
+   ├─ Usuario: Super admin (plan="master")
+   ├─ Requisitos: Credenciales master
+   ├─ Funciones:
+   │  ├─ Dashboard global
+   │  ├─ Gestión de usuarios
+   │  ├─ Ver todos los pedidos
+   │  ├─ Crear nuevos usuarios
+   │  ├─ Configuración global
+   │  └─ Logout
+   ├─ Responsive: Sí
+   └─ Estilo: Dark mode gaming
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚙️ FIREBASE (CONFIGURACIÓN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🔑 firebase-config.js
+   ├─ Descripción: Credenciales y setup
+   ├─ Qué modificar: FIREBASE_CONFIG (línea 10-20)
+   ├─ Cómo obtener credenciales:
+   │  └─ Firebase Console > Configuración > Web SDK
+   ├─ Estructura:
+   │  ├─ apiKey
+   │  ├─ authDomain
+   │  ├─ projectId
+   │  ├─ storageBucket
+   │  ├─ messagingSenderId
+   │  └─ appId
+   └─ Importancia: ⭐⭐⭐ CRÍTICO
+
+2. 🛠️ firebase-services.js
+   ├─ Descripción: Servicios CRUD reutilizables
+   ├─ No modificar: (a menos que sepas qué haces)
+   ├─ Contiene:
+   │  ├─ AuthService (login, registro)
+   │  ├─ UserService (perfiles, config)
+   │  ├─ OrderService (pedidos)
+   │  └─ ProductService (productos)
+   └─ Usado por: admin.html, master.html, index.html
+
+3. 📦 store-config.js
+   ├─ Descripción: Carga dinámica de configuración
+   ├─ Función: Sincronizar con Firebase
+   ├─ No modificar: (código interno)
+   ├─ Proporciona:
+   │  ├─ STORE_CONFIG (configuración tienda)
+   │  ├─ PRODUCTOS (lista dinámica)
+   │  └─ CURRENT_USER_ID (usuario actual)
+   └─ Usado por: store-script.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎬 SCRIPTS (LÓGICA)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🛒 store-script.js
+   ├─ Descripción: Lógica de la tienda
+   ├─ Archivo: Usado por index.html
+   ├─ Contiene:
+   │  ├─ Animación de partículas
+   │  ├─ Renderizado de productos
+   │  ├─ Gestión de carrito
+   │  ├─ Validación de formulario
+   │  ├─ Envío a WhatsApp
+   │  ├─ Guardado en Firestore
+   │  ├─ PWA install prompt
+   │  └─ Toast notifications
+   ├─ No modificar: Si funciona bien
+   └─ Personalizar: STORE_CONFIG en firebase-config.js
+
+2. 👤 admin-script.js
+   ├─ Descripción: Lógica del panel admin
+   ├─ Archivo: Usado por admin.html
+   ├─ Contiene:
+   │  ├─ Cargar perfil
+   │  ├─ Dashboard con estadísticas
+   │  ├─ Gestión de productos
+   │  ├─ Listado de pedidos
+   │  ├─ Cambio de estado
+   │  ├─ Configuración de tienda
+   │  ├─ Navegación de tabs
+   │  └─ Logout
+   ├─ No modificar: Si funciona bien
+   └─ Extensible: Para nuevas features
+
+3. 👑 master-script.js
+   ├─ Descripción: Lógica del panel master
+   ├─ Archivo: Usado por master.html
+   ├─ Contiene:
+   │  ├─ Dashboard global
+   │  ├─ Top vendedores
+   │  ├─ Gestión de usuarios
+   │  ├─ Todos los pedidos
+   │  ├─ Crear usuarios
+   │  ├─ Configuración global
+   │  └─ Filtros
+   ├─ No modificar: Si funciona bien
+   └─ Extensible: Para nuevas features
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 ESTILOS (CSS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🎪 styles.css
+   ├─ Descripción: Estilos de la tienda
+   ├─ Tamaño: 24KB
+   ├─ Contiene: Diseño gaming original (SIN CAMBIOS)
+   ├─ Variables CSS:
+   │  ├─ --orange: Color principal
+   │  ├─ --bg: Fondo oscuro
+   │  ├─ --text: Texto claro
+   │  └─ +20 más
+   ├─ Personalizar: Cambiar variables en store-config.js
+   └─ No modificar: A menos que quieras cambiar diseño
+
+2. 🎨 admin-styles.css
+   ├─ Descripción: Estilos del panel admin y master
+   ├─ Tamaño: 14KB
+   ├─ Contiene: Sidebar, tabs, tablas, forms
+   ├─ Responsive: Mobile, tablet, desktop
+   ├─ Temas: Mantiene gaming aesthetic
+   ├─ Reutilizable: Para admin.html Y master.html
+   └─ Personalizar: Cambiar colores si necesario
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📁 ASSETS (RECURSOS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 📦 manifest.json
+   ├─ Descripción: Configuración PWA
+   ├─ Contiene: Nombre, inicio, display, iconos
+   ├─ No modificar: Si PWA funciona
+   └─ Actualizar: Si cambias nombre tienda
+
+2. 🔧 service-worker.js
+   ├─ Descripción: Service worker para offline
+   ├─ Funciona: Caché de assets
+   ├─ No modificar: Si offline funciona
+   └─ Mejorar: Agregar más archivos al cache
+
+3. 🎨 icons/
+   ├─ icon-192.png (192x192px)
+   ├─ icon-512.png (512x512px)
+   └─ Uso: Iconos PWA en home screen
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 CÓMO EMPEZAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PASO 1: Leer documentación (10 min)
+────────────────────────────────
+✓ INICIO_RAPIDO.txt
+✓ RESUMEN_PROYECTO.txt
+
+PASO 2: Configurar Firebase (15 min)
+────────────────────────────────────
+✓ Crear proyecto en console.firebase.google.com
+✓ Copiar credenciales
+✓ Reemplazar en firebase-config.js
+✓ Crear usuario admin
+
+PASO 3: Probar localmente (5 min)
+─────────────────────────────────
+✓ Abrir index.html en navegador
+✓ Probar tienda (agregar productos)
+✓ Abrir login.html
+✓ Hacer login con admin
+
+PASO 4: Explorar admin.html (10 min)
+────────────────────────────────────
+✓ Ver dashboard
+✓ Editar configuración
+✓ Ver productos
+✓ Ver pedidos
+
+PASO 5: Deployer (20 min)
+────────────────────────
+✓ Firebase Hosting (recomendado)
+✓ O Vercel
+✓ O tu servidor
+
+TIEMPO TOTAL: ~1 hora para estar en producción
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 ESTRUCTURA FIRESTORE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Se crea automáticamente la siguiente estructura:
+
+users/                          (Perfiles de usuarios)
+├─ {uid_usuario}/
+│  ├─ id: string
+│  ├─ nombre: string
+│  ├─ email: string
+│  ├─ telefono: string (WhatsApp)
+│  ├─ nombreTienda: string
+│  ├─ colorTema: string (#RRGGBB)
+│  ├─ plan: string (free, pro, master)
+│  ├─ estado: string (activo, suspendido)
+│  ├─ config: map
+│  │  ├─ mostrarSorteos: boolean
+│  │  ├─ mostrarPromociones: boolean
+│  │  └─ comisiones: number
+│  └─ timestamp: createdAt, updatedAt
+
+pedidos/                        (Todos los pedidos globales)
+├─ {order_id}/
+│  ├─ id: string
+│  ├─ userId: string (referencia a user)
+│  ├─ nombreCliente: string
+│  ├─ uidJugador: string
+│  ├─ edadCliente: number
+│  ├─ metodoPago: string
+│  ├─ productos: array
+│  │  ├─ [0]: {id, diamantes, precio}
+│  │  └─ ...
+│  ├─ total: number
+│  ├─ estado: string (pendiente, pagado, entregado, cancelado)
+│  └─ fecha: timestamp
+
+usuarios_pedidos/               (Índice rápido por usuario)
+├─ {uid_usuario}/
+│  └─ todos/{order_id}/
+│     └─ (copia del pedido para queries rápidas)
+
+productos/                      (Catálogo dinámico)
+├─ {product_id}/
+│  ├─ diamantes: number
+│  ├─ precioBase: number
+│  ├─ badge: string
+│  ├─ activo: boolean
+│  └─ ...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ PREGUNTAS FRECUENTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+P: ¿Dónde cambio el teléfono WhatsApp?
+R: Dos opciones:
+   1. En admin.html → Configuración → Teléfono WhatsApp
+   2. En firebase-config.js → STORE_CONFIG.telefonoWhatsApp
+
+P: ¿Cómo agrego más productos?
+R: En Firestore Console → colección "productos" → Agregar documentos
+
+P: ¿Puedo cambiar los colores?
+R: Sí, en admin.html → Configuración → Color Principal
+
+P: ¿Qué pasa si no configuro Firebase?
+R: La tienda sigue funcionando sin persistencia (modo anónimo)
+
+P: ¿Puedo usar sin crear usuarios?
+R: Sí, la tienda funciona anónima. Pero no se guardan pedidos.
+
+P: ¿Cómo creo un usuario super admin?
+R: Ver README_FIREBASE.txt → Paso 6: Crear Usuario Admin
+
+P: ¿Se pueden tener múltiples tiendas?
+R: Sí, cada usuario es una tienda con datos aislados.
+
+P: ¿Cuánto cuesta?
+R: Firebase free tier: $0 hasta 1 millón documentos/mes
+
+P: ¿Puedo deployer a mi servidor?
+R: Sí, todos los archivos son estáticos. Sirve con nginx/apache
+
+P: ¿Dónde veo los datos guardados?
+R: Firebase Console → Firestore → Navega las colecciones
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📞 SOPORTE Y AYUDA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Si algo no funciona:
+
+1. Abre navegador → F12 (Consola de desarrollador)
+2. Mira si hay errores en rojo
+3. Network tab → Ver si request fallan
+4. Firebase Console → Revisa logs
+
+Errores comunes:
+
+"Firebase is not defined"
+→ firebase-config.js no cargó
+→ Verifica orden de scripts en HTML
+
+"Permission denied"
+→ Firestore Rules incorrectas
+→ O usuario no autenticado
+
+"No puedo hacer login"
+→ Usuario no existe en Firebase Console
+→ O credenciales incorrectas
+
+"Los productos no aparecen"
+→ Sin login: muestra por defecto
+→ Con login: busca en Firestore
+→ Agrega productos manualmente en BD
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 REFERENCIAS ÚTILES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Firebase Docs:
+https://firebase.google.com/docs
+
+Firestore Queries:
+https://firebase.google.com/docs/firestore/query-data/queries
+
+Web Development:
+https://developer.mozilla.org/docs/Web/
+
+CSS Variables:
+https://developer.mozilla.org/docs/Web/CSS/--*
+
+PWA:
+https://web.dev/progressive-web-apps/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ CHECKLIST DE LANZAMIENTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Antes de poner en producción:
+
+□ Firebase configurado con credenciales reales
+□ Usuario admin creado en Firebase Console
+□ Firestore database creado
+□ Authentication habilitado
+□ Testeado en local (tienda funciona)
+□ Login funciona
+□ Admin panel carga sin errores
+□ Pedidos se guardan en Firestore
+□ Firestore rules configuradas (seg)
+□ HTTPS habilitado
+□ Dominio personalizado (opcional)
+□ Backup automático habilitado
+□ Monitoreo de errores configurado
+□ Contacto de soporte disponible
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 PRÓXIMOS PASOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ESTA SEMANA:
+1. Leer INICIO_RAPIDO.txt
+2. Crear Firebase project
+3. Configurar firebase-config.js
+4. Probar en local
+5. Crear usuario admin
+
+PRÓXIMA SEMANA:
+1. Deployer a Firebase Hosting
+2. Configurar dominio personalizado
+3. Implementar Firestore rules
+4. Crear usuarios de prueba
+5. Hacer testing en producción
+
+PRÓXIMO MES:
+1. Agregar más revendedores
+2. Integrar pagos (Stripe/MercadoPago)
+3. Email automáticos
+4. Analytics avanzado
+5. Mobile app (React Native)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+¡Tu plataforma está lista! 🚀
+
+Versión: 1.0 - Production Ready
+Fecha: Abril 2026
+Estado: Completamente funcional
+
+Comienza con INICIO_RAPIDO.txt → README_FIREBASE.txt → Producción
+
+¡Buena suerte! 🎮

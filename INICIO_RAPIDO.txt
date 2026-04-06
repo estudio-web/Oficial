@@ -1,0 +1,237 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                    GUÍA RÁPIDA DE INICIO - 5 MINUTOS                          ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASO 1: CREAR PROYECTO FIREBASE (2 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Ve a https://console.firebase.google.com
+2. Crea nuevo proyecto: "freefire-store"
+3. Habilita Firestore Database (modo prueba)
+4. Habilita Authentication → Email/Password
+5. Copia la configuración (⚙️ Configuración del proyecto)
+
+RESULTADO: Tienes credenciales de Firebase
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASO 2: CONFIGURAR PROYECTO LOCAL (1 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Abre firebase-config.js
+2. Reemplaza FIREBASE_CONFIG con tus credenciales
+
+ANTES:
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDEMOxx_DEMO_REPLACE_THIS_WITH_YOUR_KEY",
+  ...
+
+DESPUÉS:
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSy...TUYA...xyz",
+  authDomain: "freefire-store-xxxxx.firebaseapp.com",
+  projectId: "freefire-store-xxxxx",
+  ...
+
+3. Guarda el archivo
+
+RESULTADO: Tu proyecto está conectado a Firebase
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASO 3: CREAR USUARIO ADMIN EN FIREBASE (1 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. En Firebase Console → Authentication
+2. Haz click en "Agregar usuario"
+3. Email: admin@test.com
+4. Contraseña: 123456
+5. Haz click en "Agregar usuario"
+
+RESULTADO: Puedes hacer login con admin@test.com / 123456
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASO 4: PROBAR LOCALMENTE (1 MIN)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPCIÓN A: Abrir con Live Server (VS Code)
+- Click derecho en index.html → "Open with Live Server"
+
+OPCIÓN B: Abrir directamente
+- Abre index.html en navegador (file://...)
+
+OPCIÓN C: Python simple
+- python -m http.server 8000
+- Abre http://localhost:8000
+
+RESULTADO: La tienda funciona en tu navegador
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASO 5: PROBAR FUNCIONALIDADES (OPCIONAL)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A. Tienda (index.html)
+   - Agrega productos al carrito
+   - Haz click en "Enviar por WhatsApp"
+   - Sin login = funcionamiento local
+
+B. Admin Panel (login.html)
+   - Haz click en el botón de usuario (esquina superior)
+   - Elige "Panel Admin" 
+   - O abre directamente login.html
+   - Login: admin@test.com / 123456
+   - Ver dashboard y pedidos
+
+C. Master Panel (master.html)
+   - Requiere usuario con plan="master"
+   - Ver todos los usuarios y pedidos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📁 ESTRUCTURA BÁSICA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+freefire-store/
+├── index.html              ← Tienda (SIN CAMBIOS)
+├── login.html              ← Login/Registro
+├── admin.html              ← Panel revendedor
+├── master.html             ← Panel super admin
+├── styles.css              ← Estilos tienda (ORIGINAL)
+├── admin-styles.css        ← Estilos admin
+├── firebase-config.js      ← CONFIGURAR AQUÍ ⚙️
+├── firebase-services.js    ← Servicios (no tocar)
+├── store-config.js         ← Config tienda (no tocar)
+├── store-script.js         ← Script tienda (no tocar)
+├── admin-script.js         ← Script admin (no tocar)
+├── master-script.js        ← Script master (no tocar)
+├── manifest.json           ← PWA
+├── service-worker.js       ← PWA offline
+└── icons/                  ← Iconos PWA
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 FLUJOS DE USUARIO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ USUARIO FINAL (sin cuenta)
+   index.html → Agregar productos → Llenar formulario → WhatsApp
+
+2️⃣ REVENDEDOR
+   login.html → Registrarse/Login → admin.html → Configurar tienda
+
+3️⃣ SUPER ADMIN
+   login.html → Login con admin → master.html → Crear usuarios
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ CHECKLIST DE CONFIGURACIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ Proyecto Firebase creado
+□ Firestore Database habilitado
+□ Authentication habilitado (Email/Password)
+□ FIREBASE_CONFIG actualizado en firebase-config.js
+□ Usuario admin creado en Firebase Console
+□ Probado en navegador local (tienda funciona)
+□ Login funciona con admin@test.com / 123456
+□ Panel admin carga sin errores
+□ Los pedidos se guardan en Firestore
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 DESPLEGAR A PRODUCCIÓN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPCIÓN A: Firebase Hosting (GRATIS)
+   npm install -g firebase-tools
+   firebase login
+   firebase init hosting
+   firebase deploy
+   
+   Tu sitio: https://freefire-store-xxxxx.web.app
+
+OPCIÓN B: Vercel (GRATIS)
+   1. Push a GitHub
+   2. Conectar en vercel.com
+   3. Deploy automático
+
+OPCIÓN C: Tu servidor
+   1. Subir archivos vía FTP/SSH
+   2. Servir con HTTP/HTTPS
+
+⚠️ ANTES DE PRODUCCIÓN:
+   □ Cambiar Firestore a modo "Locked" con reglas de seguridad
+   □ Cambiar contraseñas de demostración
+   □ Habilitar HTTPS
+   □ Configurar dominios personalizados
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🆘 PROBLEMAS COMUNES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+"Firebase is not defined"
+→ firebase-config.js no cargó correctamente
+→ Verificar orden de scripts en HTML
+→ Abrir F12 → Console para ver errores
+
+"No puedo hacer login"
+→ Verificar que el usuario existe en Firebase Console
+→ Credenciales correctas (admin@test.com / 123456)
+→ Firestore Database debe estar creado
+
+"Los productos no aparecen"
+→ Sin login = productos por defecto
+→ Con login = productos de Firestore (si existen)
+→ Agregar productos manualmente en Firestore
+
+"El WhatsApp no abre"
+→ Verificar STORE_CONFIG.telefonoWhatsApp en firebase-config.js
+→ Debe incluir código de país (54 para Argentina)
+
+"Error en consola del navegador"
+→ Abrir F12 → Console → Network
+→ Ver exactamente qué falla
+→ Revisar Firebase Console por errores
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📞 AYUDA RÁPIDA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Documentación Firebase:
+https://firebase.google.com/docs
+
+Ver datos en tiempo real:
+Firebase Console → Firestore → Navegar colecciones
+
+Depurar JavaScript:
+F12 → Console → Ver errores y logs
+
+Test de conexión:
+1. Abrir consola (F12)
+2. Escribir: firebase
+3. Si aparece objeto = está funcionando
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 PRÓXIMOS PASOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Después de que todo funcione:
+
+1. Crear más usuarios en Firebase
+   → Cada uno puede tener su propia tienda
+
+2. Agregar productos a Firestore
+   → Se mostrarán dinámicamente en la tienda
+
+3. Personalizar colores y nombres
+   → admin.html → Configuración
+
+4. Ver vendedores en master.html
+   → Dashboard global de ventas
+
+5. Implementar reglas de seguridad
+   → Firestore → Rules (ver README_FIREBASE.txt)
+
+6. Deployer a producción
+   → Firebase Hosting o Vercel
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+¿Necesitas ayuda? Revisa README_FIREBASE.txt para documentación completa.
+
+¡Tu plataforma SaaS está lista! 🚀
